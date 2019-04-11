@@ -1,4 +1,29 @@
-field_collection_table.widget_settings:
+#field formatter settings for each field
+field.formatter.settings.view_formatter:
+  type: mapping
+  label: 'Field collection table field formatter settings.'
+  mapping:
+    view_mode:
+      type: string
+      label: 'View Mode'
+    hide_empty:
+      type: boolean
+      label: 'Hide Empty'
+    empty:
+      type: boolean
+      label: 'Empty'
+    caption:
+      type: string
+      label: 'Caption'
+    orientation:
+      type: string
+      label: 'Orientation'
+    header_column:
+      type: string
+      label: 'Header Column'
+
+#field widget settings for each field
+field.widget.settings.view_widget:
   type: mapping
   label: 'Field Collection Table widget settings'
   mapping:

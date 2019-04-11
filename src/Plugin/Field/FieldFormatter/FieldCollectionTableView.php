@@ -27,58 +27,6 @@ class FieldCollectionTableView extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
-
-    $element = [];
-    $field_options = ['none' => $this->t('None')];
-
-    $element['hide_empty'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Hide empty collection'),
-      '#default_value' => $this->getSetting('hide_empty'),
-      '#description' => $this->t('If enabled, nothing will be displayed for an empty collection (not even the add link).'),
-    ];
-
-    $element['empty'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Hide empty columns'),
-      '#description' => $this->t('If checked, hides empty table columns.'),
-      '#default_value' => $this->getSetting('empty'),
-    ];
-
-    $element['caption'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Table caption'),
-      '#description' => $this->t('Displayed in the caption element above the table'),
-      '#default_value' => $this->getSetting('caption'),
-    ];
-
-    $element['orientation'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Orientation'),
-      '#description' => $this->t('Set the orientation of the table'),
-      '#options' => [
-        'columns' => $this->t('Columns'),
-        'rows' => $this->t('Rows'),
-      ],
-      '#default_value' => $this->getSetting('orientation'),
-    ];
-
-    $element['header_column'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Header field'),
-      '#description' => $this->t('The selected field value will be used as the horizontal table header'),
-      '#options' => $field_options,
-      '#states'=> ['visible' => [':input[name="fields[field_fc]
-      [settings_edit_form][settings][orientation]"]' => ['value' => 'rows']]],
-    ];
-
-    return $element;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function viewElements(FieldItemListInterface $items, $langcode) {
 
     /**
@@ -131,6 +79,83 @@ class FieldCollectionTableView extends FormatterBase {
 
      return ['#markup' => render($table)];
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array $form, FormStateInterface $form_state) {
+
+    $element = [];
+    $field_options = ['none' => $this->t('None')];
+    $view_modes = $this->getConfigurableViewModes();
+
+    if (!empty($view_modes)) {
+      $form['view_mode'] = [
+        '#title' => t('View Mode'),
+        '#description' => t('Select the view mode which will control which fields are shown and the display settings of those fields.'),
+        '#type' => 'select',
+        '#default_value' => $this->getSetting('view_mode'),
+        '#options' => $this->getConfigurableViewModes(),
+      ];
+    }
+
+    $element['hide_empty'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Hide empty collection'),
+      '#default_value' => $this->getSetting('hide_empty'),
+      '#description' => $this->t('If enabled, nothing will be displayed for an empty collection (not even the add link).'),
+    ];
+
+    $element['empty'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Hide empty columns'),
+      '#description' => $this->t('If checked, hides empty table columns.'),
+      '#default_value' => $this->getSetting('empty'),
+    ];
+
+    $element['caption'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Table caption'),
+      '#description' => $this->t('Displayed in the caption element above the table'),
+      '#default_value' => $this->getSetting('caption'),
+    ];
+
+    $element['orientation'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Orientation'),
+      '#description' => $this->t('Set the orientation of the table'),
+      '#options' => [
+        'columns' => $this->t('Columns'),
+        'rows' => $this->t('Rows'),
+      ],
+      '#default_value' => $this->getSetting('orientation'),
+    ];
+
+    $element['header_column'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Header field'),
+      '#description' => $this->t('The selected field value will be used as the horizontal table header'),
+      '#options' => $field_options,
+      '#states'=> ['visible' => [':input[name="fields[field_fc]
+      [settings_edit_form][settings][orientation]"]' => ['value' => 'rows']]],
+    ];
+
+    return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultSettings() {
+    return [
+      'view_mode' => 'default',
+      'hide_empty' => FALSE,
+      'empty' => FALSE,
+      'caption' => '',
+      'orientation' => 'default',
+      'header_column' => 'default',
+    ];
+  } + parent::defaultSettings();
 
   /**
    * {@inheritdoc}
