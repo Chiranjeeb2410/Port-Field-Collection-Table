@@ -63,7 +63,7 @@ class FieldCollectionTable extends WidgetBase implements WidgetInterface  {
       '#description' => $this->t('If checked, the field title will be hidden.'),
       '#default_value' => $this->getSetting('hide_title'),
       '#weight' => 2,
-    ]
+    ];
 
     return $element;
   }

@@ -50,7 +50,7 @@ class FieldCollectionTableView extends FormatterBase {
               $weight = $content[$fieldname]['weight'];
               if(!isset($header[$weight]))  {
                 $header[$weight] = $field_definition->getLabel();
-                $content[$fieldname]]['label'] = 'hidden';
+                $content[$fieldname]['label'] = 'hidden';
                 $formatters[$fieldname] = \Drupal::service('plugin.manager.field.formatter')->getInstance(array(
                 'field_definition' => $field_definition,
                 'view_mode' => 'default',
@@ -74,7 +74,7 @@ class FieldCollectionTableView extends FormatterBase {
      $table = [
        '#type' => 'table',
        '#headers' => $header,
-       '#rows' => $row;
+       '#rows' => $row,
      ];
 
      return ['#markup' => render($table)];
