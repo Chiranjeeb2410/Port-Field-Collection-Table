@@ -97,7 +97,7 @@ class FieldCollectionTable extends WidgetBase implements WidgetInterface  {
       ->setComponent($field_name, [
         'type' => 'text_textfield',
       ]);
-      ->save();
+    save();
     $display->buildForm($field_collection_item, $element, $form_state);
 
     if (empty($element['#required'])) {

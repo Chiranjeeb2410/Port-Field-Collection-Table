@@ -155,7 +155,7 @@ class FieldCollectionTableView extends FormatterBase {
       'orientation' => 'default',
       'header_column' => 'default',
     ];
-  } + parent::defaultSettings();
+  }
 
   /**
    * {@inheritdoc}
@@ -176,9 +176,9 @@ class FieldCollectionTableView extends FormatterBase {
       $output .= '<br />';
       $output .= $this->t('Format fields as <strong>!orientation</strong>.', ['!orientation' => $orientations[$this->getSetting('orientation')]]);
     }
-    if (isset($this->getSetting('orientation')) && $this->getSetting('orientation') === 'rows') {
+    if (!empty($this->getSetting('orientation')) && $this->getSetting('orientation') === 'rows') {
       $output .= '<br />';
-      if (isset($this->getSetting('header_column')) && $this->getSetting('header_column') !== 'none') {
+      if (!empty($this->getSetting('header_column')) && $this->getSetting('header_column') !== 'none') {
         $output .= '<br />';
         $output .= $this->t('Field @field value is used as the header', ['@field' => $this->getSetting('header_column')]);
       }
