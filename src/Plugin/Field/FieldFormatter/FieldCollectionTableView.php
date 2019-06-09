@@ -87,7 +87,6 @@ class FieldCollectionTableView extends FormatterBase {
 
     $element = [];
     $field_options = ['none' => $this->t('None')];
-    $view_modes = $this->getConfigurableViewModes();
 
     if (!empty($view_modes)) {
       $form['view_mode'] = [
@@ -95,7 +94,6 @@ class FieldCollectionTableView extends FormatterBase {
         '#description' => t('Select the view mode which will control which fields are shown and the display settings of those fields.'),
         '#type' => 'select',
         '#default_value' => $this->getSetting('view_mode'),
-        '#options' => $this->getConfigurableViewModes(),
       ];
     }
 
@@ -146,7 +144,7 @@ class FieldCollectionTableView extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultSettings() {
+  public static function defaultSettings() {
     return [
       'view_mode' => 'default',
       'hide_empty' => FALSE,
@@ -157,34 +155,5 @@ class FieldCollectionTableView extends FormatterBase {
     ];
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function settingsSummary()  {
-
-    $output = settingsSummary();
-
-    $output .= '<br>';
-    $output .= !empty($this->getSetting('hide_empty')) ? $this->t('Empty collections: Hidden') : $this->t('Empty collections: Shown');
-    $output .= '<br>';
-    $output .= !empty($this->getSetting('empty')) ? $this->t('Empty columns: Hidden') : $this->t('Empty columns: Shown');
-    $output .= !empty($this->getSetting('caption')) ? '<br>' . $this->t('Caption: %caption', ['%caption' => $this->t($this->getSetting('caption'))]) : '';
-    $orientations = ['columns' => $this->t('Column'), 'rows' => $this->t('Row')];
-    $output .= '<br />';
-    $output .= !empty($this->getSetting('empty')) ? $this->t('Empty columns: Hidden') : $this->t('Empty columns: Shown');
-    if (!empty($this->getSetting('orientation'))) {
-      $output .= '<br />';
-      $output .= $this->t('Format fields as <strong>!orientation</strong>.', ['!orientation' => $orientations[$this->getSetting('orientation')]]);
-    }
-    if (!empty($this->getSetting('orientation')) && $this->getSetting('orientation') === 'rows') {
-      $output .= '<br />';
-      if (!empty($this->getSetting('header_column')) && $this->getSetting('header_column') !== 'none') {
-        $output .= '<br />';
-        $output .= $this->t('Field @field value is used as the header', ['@field' => $this->getSetting('header_column')]);
-      }
-    }
-
-    return $output;
-  }
 
 }
