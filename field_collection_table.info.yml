@@ -5,4 +5,4 @@ core: 8.x
 package: 'Custom'
 
 dependencies:
-  - field_collection
+  - field_collection:field-collection
