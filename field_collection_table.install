@@ -9,8 +9,8 @@
  * Implements hook_uninstall().
  */
 function field_collection_table_uninstall() {
-  \Drupal::config('field_collection_table.settings')->clear('field_collection_table_format_form')->save();
-  \Drupal::config('field_collection_table.settings')->clear('field_collection_table_hide_empty')->save();
+  \Drupal::configFactory()->getEditable('field_collection_table.settings')->clear('field_collection_table_format_form')->save();
+  \Drupal::configFactory()->getEditable('field_collection_table.settings')->clear('field_collection_table_hide_empty')->save();
 }
 
 /**
