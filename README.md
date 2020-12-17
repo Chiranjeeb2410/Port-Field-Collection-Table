@@ -1,4 +1,4 @@
-# Port Field Collection Table
+# Field Collection Table
 
 ## CONTENTS OF THIS FILE
 
@@ -12,7 +12,7 @@
 
 ## INTRODUCTION
 
-Provides a table formatter for the Field Collection module.
+Provides a table formatter for the [Field Collection](https://www.drupal.org/project/field_collection) module.
 This module provides both a field formatter and a widget for the Field Collection entity type.
 
 
@@ -36,4 +36,8 @@ Visit: https://youtu.be/T0aDHuAHWf4
 ## TROUBLESHOOTING
 
 If the module is not shown in the list try deleting the module and try cloning it again. or else try clearing the cache, and then try installing it.
+
+## SUPPORTING ORGANIZATIONS
+
+[Websystem](https://www.drupal.org/websystem)
 
